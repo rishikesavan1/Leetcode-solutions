@@ -17,8 +17,8 @@ public:
                     y--;
                     break;
             }
-            int mand = abs(x)+abs(y);
-            int dis = mand + min(2 * k,pos - mand);
+            int mandis = abs(x)+abs(y);
+            int dis = mandis + min(2 * k,pos - mandis);
             sol = max(sol,dis);
             pos++;
         }
