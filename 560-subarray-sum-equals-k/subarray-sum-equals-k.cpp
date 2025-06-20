@@ -4,7 +4,7 @@ public:
         int cnt = 0 , diff = 0;
         int prefsum = 0;
         unordered_map<int,int> mp = {{0,1}};
-        for(auto a : nums){
+        for(int a : nums){
             prefsum += a;
             diff = prefsum-k;
             cnt += mp[diff];
