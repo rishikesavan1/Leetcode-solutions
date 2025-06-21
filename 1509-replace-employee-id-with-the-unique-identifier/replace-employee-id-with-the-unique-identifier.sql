@@ -1,3 +1,1 @@
-select eu.unique_id , e.name from employees e 
-left join employeeuni eu 
-on e.id = eu.id
+select employeeuni.unique_id , employees.name from employees left join employeeuni on employees.id = employeeuni.id
