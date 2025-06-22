@@ -12,8 +12,6 @@ public:
             }
         }
         for(int i = 0 ; i < n ; i+= k){
-            // if(i+k >= n) break;
-            cout << s.substr(i,i+k) << " " << i << ' ' << i+k << endl;
             ss.push_back(s.substr(i,k));
         }
         return ss;
