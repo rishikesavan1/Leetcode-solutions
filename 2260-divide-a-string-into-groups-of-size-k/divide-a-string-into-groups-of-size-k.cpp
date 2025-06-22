@@ -5,7 +5,6 @@ public:
         vector<string> ss;
         if(n%k){
             int rem = k - (n%k);
-            cout << n%k;
             while(rem){
                 s.push_back(fill);
                 rem--;
