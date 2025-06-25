@@ -8,7 +8,7 @@ public:
                 val = nums[i];
                 cnt = 1;
             }
-            else if(nums[i] == val && cnt++);
+            else if(nums[i] == val)   cnt++;
             else    cnt--;
         }
         return val; 
