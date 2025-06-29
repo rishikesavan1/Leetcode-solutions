@@ -4,7 +4,7 @@ public:
         int sum = 0 , maxi = INT_MIN;
         for(auto i : nums){
             sum += i;
-            if(sum > maxi) maxi = sum;
+            maxi = max(maxi,sum);
             if(sum < 0) sum = 0; 
         }
         return maxi;
