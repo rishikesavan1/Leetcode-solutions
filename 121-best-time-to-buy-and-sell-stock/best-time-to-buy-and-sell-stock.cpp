@@ -4,7 +4,7 @@ public:
         int minprice = INT_MAX , maxprofit = 0 ;
         for(auto i : prices){
             minprice = min(minprice , i);
-            maxprofit = max(maxprofit , i - minprice);
+            maxprofit = max( i - minprice ,maxprofit);
         }
         return maxprofit;
     }
