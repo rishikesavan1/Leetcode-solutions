@@ -1,27 +1,23 @@
-#include <vector>
-#include <algorithm>
-using namespace std;
-
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int n = nums.size(), i = n - 2;
-        
-        // Step 1: Find the breakpoint
-        while (i >= 0 && nums[i] >= nums[i + 1]) {
-            i--;
-        }
-        
-        if (i >= 0) {
-            // Step 2: Find the smallest element larger than nums[i]
-            int j = n - 1;
-            while (nums[j] <= nums[i]) {
-                j--;
+        int idx = -1;
+        for(int i = nums.size()-2 ; i >= 0 ;i--){
+            if(nums[i] < nums[i+1]){
+                idx = i;
+                break;
             }
-            swap(nums[i], nums[j]);
         }
-        
-        // Step 3: Reverse the subarray to the right of i
-        reverse(nums.begin() + i + 1, nums.end());
+        if(idx == -1){
+            reverse(nums.begin(),nums.end());
+            return;
+        }
+        for(int i = nums.size()-1 ; i > idx ;i--){
+                if(nums[i] > nums[idx]){
+                    swap(nums[idx],nums[i]);
+                    break;
+                }
+            }
+            reverse(nums.begin()+idx+1,nums.end());
     }
 };
