@@ -2,9 +2,8 @@ class Solution {
 public:
     bool isPalindrome(int x) {
         string s = to_string(x);
-        for(int i = 0 ; i*2 < s.size();i++){
-            if(s[i] != s[s.size()-i-1]) return 0;
-        }
-        return 1;
+        string r = s;
+        reverse(r.begin(),r.end());
+        return s == r;
     }
 };
