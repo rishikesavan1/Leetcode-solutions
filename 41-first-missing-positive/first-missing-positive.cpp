@@ -7,7 +7,7 @@ public:
                 st.insert(i);
         int val = 1;
         for(auto i : st){
-            if(!st.count(val)){
+            if(st.find(val) == st.end()){
                 return val;
             }
             val++;
