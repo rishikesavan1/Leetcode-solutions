@@ -1,60 +1,31 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector<vector<int>> ans(n, vector<int>(n,0));
-        queue<pair<pair<int,int>,int>> q;
-        q.push({{0,0},1});
-
-        int cnt = 1;
-        while(!q.empty()){
-            int x = q.front().first.first;
-            int y = q.front().first.second;
-            int num = q.front().second;
-            q.pop();
-            ans[x][y] = cnt;
-            cnt++;
-
-            if (num == 1){
-                if (y+1<n && ans[x][y+1] == 0){
-                    q.push({{x,y+1},1});
-                }
-                else{
-                    if(x+1<n && ans[x+1][y] == 0){
-                        q.push({{x+1 , y}, -2});
-                    }
-                }
+        vector<vector<int>> spiral(n,vector<int>(n));
+        int val = 1;
+        int top =0 , left = 0 , bottom = n-1, right = n-1;
+        while(top <= bottom && left <= right){
+            for(int i = left ; i <= right ; i++){
+                spiral[top][i] = val++;
             }
-            if (num == -1){
-                if (y-1>=0 && ans[x][y-1] == 0){
-                    q.push({{x, y-1}, -1});
-                }
-                else{
-                    if (x-1>= 0 && ans[x-1][y] == 0){
-                        q.push({{x-1, y}, 2});
-                    }
-                }
+            top++;
+            for(int i = top ; i <= bottom ; i++){
+                spiral[i][right] = val++;
             }
-            if ( num == 2){
-                if (x-1>=0 && ans[x-1][y] == 0){
-                    q.push({{x-1 , y}, 2});
+            right--;
+            if(top <= bottom){
+                for(int i = right ; i >= left;i--){
+                    spiral[bottom][i] = val++;
                 }
-                else{
-                    if(y+1< n && ans[x][y+1] == 0){
-                        q.push({{x,y+1}, 1});
-                    }
-                }
+                bottom--;
             }
-            if (num == -2){
-                if (x+1<n && ans[x+1][y] == 0){
-                    q.push({{x+1, y}, -2});
+            if(left <= right){
+                for(int i = bottom ; i >= top ; i--){
+                    spiral[i][left] = val++;
                 }
-                else{
-                    if (y-1>=0 && ans[x][y-1] == 0){
-                        q.push({{x, y-1} , -1});
-                    }
-                }
+                left++;
             }
         }
-        return ans;
+        return spiral;
     }
 };
