@@ -7,6 +7,7 @@ public:
         for(auto [k,v] : mp){
             if(v > nums.size() / 3)
                 ans.push_back(k);
+            if(ans.size() == 2) break;
         }
         return ans;
     }
