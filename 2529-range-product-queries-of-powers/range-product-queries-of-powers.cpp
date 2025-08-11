@@ -11,7 +11,7 @@ public:
             i++;
         }
 
-        for(auto &q : queries){
+        for(auto q : queries){
             long long prod = 1;
             for(int j = q[0] ; j <= q[1];j++){
                 prod = (pow2[j] * prod) % mod;
