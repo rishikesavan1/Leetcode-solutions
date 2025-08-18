@@ -1,51 +1,45 @@
 class Solution {
 public:
-double epl=0.1;
-bool solve(vector<double>&temp){
-    if(temp.size()==1){
-        return abs(temp[0]-24.0)<=epl;
+    bool valid(double a,double b){
+        return fabs(a+b-24.0)<0.0001 | fabs(a-b-24.0)<0.0001 | fabs(a*b-24.0)<0.0001 | (b!=0 and fabs(a/b-24.0)<0.0001);
     }
-    for(int i=0;i<temp.size();i++){
-        for(int j=0;j<temp.size();j++){
-if(i==j){
-    continue;
-
-}
-    vector<double>ans;
-for(int k=0;k<temp.size();k++){
-    if(k!=i and k!=j){
-ans.push_back(temp[k]);
+    bool valid(double a,double b,double c){
+        return valid(a+b,c) |valid(a,b+c) |valid(a-b,c)|valid(a,b-c)|valid(a*b,c)|valid(a,b*c)|valid(a/b,c)|valid(a,b/c);
     }
-}
-double a=temp[i];
-double b=temp[j];
-vector<double>possible={a+b,b-a,a-b,a*b};
-   if(abs(b)>0.0) {
-                    possible.push_back(a/b);
-                }
+    bool get_perumutation(int idx,vector<double>& card){
+        if(idx==4){
+           return valid(card[0]+card[1],card[2],card[3]) |
+                    valid(card[0],card[1]+card[2],card[3]) |
+                    valid(card[0],card[1],card[2]+card[3]) |
+                    valid(card[0]-card[1],card[2],card[3]) |
+                    valid(card[0],card[1]-card[2],card[3]) |
+                    valid(card[0],card[1],card[2]-card[3]) |
+                    valid(card[0]*card[1],card[2],card[3]) |
+                    valid(card[0],card[1]*card[2],card[3]) |
+                    valid(card[0],card[1],card[2]*card[3]) |
+                    valid(card[0]/card[1],card[2],card[3]) |
+                    valid(card[0],card[1]/card[2],card[3]) |
+                    valid(card[0],card[1],card[2]/card[3]);
 
-                if(abs(a)>0.0) {
-                    possible.push_back(b/a);
-                }
-
-                for(double val:possible) {
-                    ans.push_back(val); 
-                    if(solve(ans)==true)  
-                        return true;
-                    ans.pop_back(); 
-                }
-            }
         }
-
-        return false;
+        int res=false;
+        unordered_set<int> s;
+        for(int i=idx;i<4 and !res;i++){
+            if(s.count(card[i]))
+                continue;
+            s.insert(card[i]);
+            swap(card[i],card[idx]);
+            res|=get_perumutation(idx+1,card);
+            swap(card[i],card[idx]);
         }
-    
-
+        return res;
+    }
     bool judgePoint24(vector<int>& cards) {
-        vector<double>temp;
-        for(int i=0;i<cards.size();i++){
-            temp.push_back(1.0*cards[i]);
+        vector<double> card;
+        int n=cards.size();
+        for(int i=0;i<n;i++){
+            card.push_back((double)cards[i]);
         }
-        return solve(temp);
+        return get_perumutation(0,card);
     }
 };
