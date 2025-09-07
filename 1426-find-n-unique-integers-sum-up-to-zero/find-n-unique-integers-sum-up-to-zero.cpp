@@ -2,16 +2,13 @@ class Solution {
 public:
     vector<int> sumZero(int n){
         vector<int> ans;
-        int val = -1;
+        int pos = 1, neg = -1; 
         for(int i = 0 ; i < n/2; i++){
-            ans.push_back(val--);
+            ans.push_back(neg--);
+            ans.push_back(pos++);
         }
         if(n%2){
             ans.push_back(0);
-        }
-        val = 1;
-        for(int i = 0 ; i < n/2; i++){
-            ans.push_back(val++);
         }
         return ans;
     }
