@@ -7,9 +7,9 @@ public:
         int consonant_max = 0,vowel_max = 0; 
         for(auto [c,i] : mp){
             if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
-                vowel_max = max(vowel_max , i);
+                vowel_max = max(i,vowel_max);
             else
-                consonant_max = max(consonant_max,i);
+                consonant_max = max(i,consonant_max);
         }
         return vowel_max + consonant_max;
     }
